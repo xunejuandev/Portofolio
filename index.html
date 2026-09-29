@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id" x-data="portfolioApp()" x-init="init()">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakobus Dimas Juan W — Backend Systems Engineer | Portfolio</title>
+
+    <!-- SEO & Meta Tags -->
+    <meta name="description"
+        content="Portfolio Yakobus Dimas, Backend Systems Engineer berbasis di Yogyakarta. Spesialis Laravel, PHP, dan database optimization.">
+    <meta name="keywords" content="Backend Engineer, Laravel, PHP, MySQL, Yogyakarta, Portfolio, Fullstack Developer">
+    <meta name="author" content="Yakobus Dimas Juan W">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Yakobus Dimas — Backend Systems Engineer">
+    <meta property="og:description"
+        content="Portfolio Yakobus Dimas, Backend Systems Engineer berbasis di Yogyakarta. Spesialis Laravel, PHP, dan database optimization.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https:// .dev">
+    <meta property="og:image" content="https:// .dev/assets/images/avatar.jpg">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yakobus Dimas — Backend Systems Engineer">
+    <meta name="twitter:description"
+        content="Backend Systems Engineer berbasis di Yogyakarta. Spesialis Laravel, MySQL, dan system microservices.">
+    <meta name="twitter:image" content="https:// .dev/assets/images/avatar.jpg">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#F1EEE7">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https:// .dev">
+
+    <!-- Preconnect for Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Custom CSS (Design System) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utilities.css">
+
+    <!-- Alpine.js (Defer for performance) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Structured Data: JSON-LD Person Schema (Phase 5) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Yakobus Dimas Juan W",
+      "jobTitle": "Backend Systems Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance / Yogyakarta, Indonesia"
+      },
+      "url": "https:// .dev",
+      "image": "https:// .dev/assets/images/avatar.jpg",
+      "description": "Backend Systems Engineer spesialisasi arsitektur enterprise Laravel, optimasi MySQL, dan system microservices berbasis di Yogyakarta.",
+      "knowsAbout": ["Laravel", "PHP", "MySQL", "Livewire", "Microservices", "Background Queue Workers"],
+      "sameAs": [
+        "https://github.com/ ",
+        "https://linkedin.com/in/ "
+      ]
+    }
+    </script>
+</head>
+
+<body class="grid-blueprint" :class="{ 'overflow-hidden': modalOpen }">
+
+    <!-- ============================================================
+         GLOBAL NAVIGATION
+         ============================================================ -->
+
+    <!-- Desktop Ribbon Nav (Hidden on Mobile, Visible on lg+) -->
+    <div class="nav-ribbon-wrapper z-nav">
+        <nav class="nav-ribbon" aria-label="Main Navigation">
+            <div class="nav-brand">
+                $ nav
+            </div>
+            <a href="#start" class="nav-item" :class="{ 'is-active': activeSection === 'start' }"
+                @click="smoothScroll($event, 'start')">
+                01. HOME
+            </a>
+            <a href="#projects" class="nav-item" :class="{ 'is-active': activeSection === 'projects' }"
+                @click="smoothScroll($event, 'projects')">
+                02. PROJECTS
+            </a>
+            <a href="#log" class="nav-item" :class="{ 'is-active': activeSection === 'log' }"
+                @click="smoothScroll($event, 'log')">
+                03. LOG
+            </a>
+            <a href="#status" class="nav-item" :class="{ 'is-active': activeSection === 'status' }"
+                @click="smoothScroll($event, 'status')">
+                04. STATUS
+            </a>
+            <a href="#mail" class="nav-item" :class="{ 'is-active': activeSection === 'mail' }"
+                @click="smoothScroll($event, 'mail')">
+                05. CONTACT
+            </a>
+            <!-- FILL: ganti dengan path CV PDF aktual -->
+            <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+                class="nav-item nav-item-cv">
+                📄 CV
+            </a>
+        </nav>
+    </div>
+
+    <!-- Mobile FAB Nav (Visible on Mobile, Hidden on lg+) -->
+    <div class="nav-fab-wrapper z-nav">
+        <!-- Vertical Menu (Expands upwards) -->
+        <nav class="nav-fab-menu" :class="{ 'is-open': mobileMenuOpen }" aria-label="Mobile Navigation">
+            <a href="#start" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'start')">01.
+                HOME</a>
+            <a href="#projects" class="nav-fab-item"
+                @click="mobileMenuOpen = false; smoothScroll($event, 'projects')">02. PROJECTS</a>
+            <a href="#log" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'log')">03. LOG</a>
+            <a href="#status" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'status')">04.
+                STATUS</a>
+            <a href="#mail" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'mail')">05.
+                CONTACT</a>
+            <!-- FILL: ganti dengan path CV PDF aktual -->
+            <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+                class="nav-fab-item nav-fab-item-cv">📄 CV</a>
+        </nav>
+
+        <!-- FAB Button -->
+        <button class="nav-fab-btn" :class="{ 'is-open': mobileMenuOpen }" @click="mobileMenuOpen = !mobileMenuOpen"
+            aria-label="Toggle Navigation" aria-expanded="false" :aria-expanded="mobileMenuOpen.toString()">
+            <span x-show="!mobileMenuOpen">$_</span>
+            <span x-show="mobileMenuOpen">×</span>
+        </button>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: HERO / COVER
+         ============================================================ -->
+    <section id="start" class="section-padding relative bg-paper overflow-hidden" style="min-height: 100vh;">
+
+        <!-- Watermark Code (Background) -->
+        <div class="code-watermark" aria-hidden="true">
+            <pre>
+&lt;
+
+?php
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+class SystemController extends Controller
+{
+    public function optimize(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            // Complex backend operations handled here
+            $this-&gt;dispatchSync(new OptimizeDatabaseJob());
+            DB::commit();
+
+            Log::info('System optimized successfully.', ['time' =&gt; now()]);
+            return response()-&gt;json(['status' =&gt; 'optimized', 'code' =&gt; 200]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Optimization failed: ' . $e-&gt;getMessage());
+            return response()-&gt;json(['error' =&gt; 'System fault'], 500);
+        }
+    }
+}
+</pre>
+        </div>
+
+        <!-- Blueprint Crosshair SVG -->
+        <div class="blueprint-crosshair" aria-hidden="true">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="200" r="180" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-dasharray="4 8" />
+                <circle cx="200" cy="200" r="120" fill="none" stroke="currentColor" stroke-width="1" />
+                <circle cx="200" cy="200" r="60" fill="none" stroke="currentColor" stroke-width="2" />
+                <line x1="200" y1="0" x2="200" y2="400" stroke="currentColor" stroke-width="1" />
+                <line x1="0" y1="200" x2="400" y2="200" stroke="currentColor" stroke-width="1" />
+            </svg>
+        </div>
+
+        <div class="container relative z-1">
+
+            <!-- Top Bar Zine -->
+            <div class="zine-topbar mb-8 reveal reveal-left">
+                <div>Issue No. 01 — Yogyakarta / 2026</div>
+                <div class="zine-topbar-right">
+                    <div class="barcode hidden md:flex" aria-hidden="true"></div>
+                    <div class="text-mono-sm border-l-ink pl-4 ml-4 hidden sm:block" aria-hidden="true">SCAN_ME</div>
+                </div>
+            </div>
+
+            <!-- Ruler Ticks -->
+            <div class="ruler-strip mb-12 reveal" aria-hidden="true"></div>
+
+            <!-- Tategaki (Left Side) -->
+            <div class="tategaki tategaki-hero reveal reveal-left reveal-delay-2" aria-hidden="true">
+                フルスタックエンジニア
+            </div>
+
+            <!-- Main Hero Grid -->
+            <div class="hero-grid">
+
+                <!-- Left/Center Content -->
+                <div class="hero-content reveal reveal-delay-1">
+
+                    <div class="mb-4">
+                        <div class="torn-sticker torn-sticker-ink codename-sticker stack-shadow-xs">
+                            // Backend Systems Engineer
+                        </div>
+                    </div>
+
+                    <h1 class="headline-hero mb-6">
+                        YAKOBUS<br>DIMAS JUAN W
+                    </h1>
+
+                    <p class="lead-text mb-10 max-w-2xl mx-auto lg:mx-0">
+                        Backend Systems Engineer dengan 4+ tahun pengalaman menangani
+                        enterprise-level aplikasi Rails, optimasi database MySQL, dan arsitektur
+                        system microservices. Fokus pada extensibility, performance, dan
+                        scalable solution yang dapat downloadable untuk organisasi mu.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+                        <a href="#projects" class="btn btn-primary btn-skew" @click="smoothScroll($event, 'projects')">
+                            <span>📰 Read Issue</span>
+                        </a>
+                        <a href="#status" class="btn btn-secondary btn-skew" @click="smoothScroll($event, 'status')">
+                            <span>›_ System Status</span>
+                        </a>
+                    </div>
+
+                    <!-- Uptime Widget -->
+                    <div class="uptime-widget reveal reveal-delay-3">
+                        <span class="status-dot bg-gold"></span>
+                        <div>
+                            <span class="uptime-widget-label">UPTIME</span> — 4+ YEARS ACTIVE
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Content (Avatar) -->
+                <div class="hero-avatar-wrapper reveal reveal-delay-2">
+                    <div class="relative border-4-ink stack-shadow bg-paper2 p-2">
+                        <div class="halftone-overlay aspect-portrait">
+                            <!-- FILL: ganti src dengan path foto profil aktual -->
+                            <img src="assets/images/avatar.jpg"
+                                alt="Yakobus Dimas — Backend Systems Engineer, Yogyakarta"
+                                class="w-full h-full object-cover" width="480" height="600" fetchpriority="high"
+                                decoding="async">
+                        </div>
+
+                        <!-- Hanko Stamp -->
+                        <div class="hanko hanko-hero bg-paper stack-shadow-stamp" aria-label="Open to work">
+                            <div class="hanko-inner">
+                                <div class="hanko-text-main">採用中</div>
+                                <div class="hanko-text-sub">OPEN TO WORK</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-center text-mono-sm opacity-50">
+                        Fig 1. Lead Engineer Profile
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="mt-16 text-center reveal reveal-delay-4">
+                <a href="#projects"
+                    class="inline-flex flex-col items-center gap-2 text-mono-sm opacity-60 hover:opacity-100 transition-opacity"
+                    @click="smoothScroll($event, 'projects')">
+                    <span>Scroll untuk baca isu ini</span>
+                    <span class="text-lg">↓</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: PROJECTS
+         ============================================================ -->
+    <section id="projects" class="section-padding">
+
+        <!-- Section Banner -->
+        <div class="section-banner mb-12 reveal">
+            <h2 class="headline-banner">BREAKING NEWS: FEATURED PROJECTS</h2>
+        </div>
+
+        <div class="container max-w-2xl lg:max-w-none">
+
+            <!-- Project 1 -->
+            <div class="project-card reveal reveal-delay-1">
+                <!-- Image Column -->
+                <div class="project-card-img-col">
+                    <div class="torn-sticker torn-sticker-cyan project-category-badge stack-shadow-xs">
+                        // Web App
+                    </div>
+                    <div class="project-img-wrapper halftone-overlay">
+                        <!-- FILL: ganti dengan screenshot proyek riil -->
+                        <img src="assets/images/project1.jpg" alt="Smart Lab Booking — Padukuhan Ngasem Website"
+                            class="w-full h-full object-cover" width="800" height="600" loading="lazy" decoding="async"
+                            fetchpriority="low">
+                    </div>
+                </div>
+
+                <!-- Content Column -->
+                <div class="project-card-content">
+                    <div class="project-dateline">Yogyakarta, Ags 2025 — Special Report</div>
+                    <h3 class="headline-project mb-4">Smart Lab Booking:<br>Automating Laboratory System</h3>
+                    <p class="lead-text mb-6">
+                        A responsive single-page profile website for Padukuhan Ngasem built to digitalize and centralize
+                        local hamlet information. Handled end-to-end as the sole developer, the platform features
+                        curated
+                        sections for village updates, tourism potential, and a media gallery, establishing a functional
+                        digital identity to increase public exposure and engagement.
+                    </p>
+
+                    <!-- Project Metrics -->
+                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
+                        <span class="text-cyan">///METRICS:</span>
+                        <ul>
+                            <li>15+ new users aktif dalam 1 bulan</li>
+                            <li>40% peningkatan turun konten (downloads)</li>
+                            <li>0 downtime selama 6 bulan operasi</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tech Stack Tokens -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-token">HTML5</span>
+                        <span class="tech-token">CSS3</span>
+                        <span class="tech-token">Responsive Web Design (RWD)</span>
+                        <span class="tech-token">Single-Page Architecture</span>
+                    </div>
+
+                    <!-- Battle Log -->
+                    <div class="battle-log mb-8">
+                        <p><span class="battle-log-label">PROBLEM:</span>
+                            Padukuhan Ngasem lacked an accessible online presence, leaving local news, village updates,
+                            and tourism potential uncentralized and offline, which restricted the hamlet's public
+                            visibility to outside visitors and potential tourists.
+                        </p>
+                        <p><span class="battle-log-label">RESULT:</span>
+                            Single-handedly designed and developed a clean, fully responsive digital profile from
+                            scratch,
+                            successfully establishing the hamlet's online presence and providing a centralized portal to
+                            promote local tourism and village information.
+                        </p>
+                    </div>
+
+                    <!-- CTA Links -->
+                    <div class="mt-auto pt-4 flex flex-wrap gap-3">
+                        <!-- FILL: ganti dengan URL GitHub repository aktual -->
+                        <a href="https://github.com/ " target="_blank" rel="noopener noreferrer"
+                            class="btn btn-ghost btn-skew" @click="collectStamp(1)">
+                            <span>🔍 Inspect Architecture ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card project-card-alt reveal reveal-delay-2">
+                <div class="project-card-img-col">
+                    <div class="torn-sticker torn-sticker-cyan project-category-badge stack-shadow-xs">
+                        // Web App
+                    </div>
+                    <div class="project-img-wrapper halftone-overlay">
+                        <img src="assets/images/project2.jpg" alt="LAB SD Booking & Inventory System — Laravel Livewire"
+                            class="w-full h-full object-cover" width="800" height="600" loading="lazy" decoding="async"
+                            fetchpriority="low">
+                    </div>
+                </div>
+
+                <div class="project-card-content">
+                    <div class="project-dateline">Yogyakarta, Jan 2026 — Feb 2026<br>Special Report</div>
+                    <h3 class="headline-project mb-4">LAB SD <br>Booking & Inventory System</h3>
+                    <p class="lead-text mb-6">
+                        A full-stack management platform built to facilitate the reactivation of a long-dormant Data
+                        Structure Laboratory. The system provides a smart booking solution for students and faculty to
+                        reserve individual PCs, workspace clusters, and lab equipment. It also adopts a cybercafe-style
+                        master-client architecture, enabling administrators to centrally monitor and manage client PCs
+                        remotely over a Wi-Fi network, bypassing traditional physical LAN constraints.
+                    </p>
+
+                    <!-- Project Metrics -->
+                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
+                        <span class="text-cyan">///METRICS:</span>
+                        <ul>
+                            <li>95% terjadwal booking system (ai-ready)</li>
+                            <li>2,000 user kampus menawarkan 98% approval</li>
+                            <li>1.5x boost di nilai kepuasan lab (survey)</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-token">Laravel</span>
+                        <span class="tech-token">Livewire</span>
+                        <span class="tech-token">Master-Client Architecture</span>
+                        <span class="tech-token">Custom Client Scripts</span>
+                        <span class="tech-token">Wi-Fi Networking</span>
+                    </div>
+
+                    <div class="battle-log mb-8"
+                        style="border-left-color: var(--cyan); background: rgba(26, 166, 193, 0.04);">
+                        <p><span class="battle-log-label" style="color: var(--cyan);">PROBLEM:</span>
+                            The university needed to reactivate a long-unused laboratory but lacked a structured system
+                            for students and faculty to reserve PCs, workspaces (clusters), and equipment. Additionally,
+                            the absence of functional LAN infrastructure prevented administrators from monitoring and
+                            controlling
+                            the lab computers centrally.
+                        </p>
+                        <p><span class="battle-log-label" style="color: var(--cyan);">RESULT:</span>
+                            Successfully facilitated the lab's reactivation by delivering a unified digital platform
+                            for real-time facility bookings and asset tracking. To solve the infrastructure limits,
+                            a custom Wi-Fi-based master-client system was engineered, enabling administrators to
+                            remotely control all client PCs without the need to overhaul the physical network cables.
+                        </p>
+                    </div>
+
+                    <!-- CTA Links -->
+                    <div class="mt-auto pt-4 flex flex-wrap gap-3">
+                        <!-- FILL: ganti dengan URL GitHub repository aktual -->
+                        <a href="https://github.com/ " target="_blank" rel="noopener noreferrer"
+                            class="btn btn-ghost btn-skew" @click="collectStamp(1)">
+                            <span>🔍 Inspect Architecture ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card reveal reveal-delay-3">
+                <div class="project-card-img-col">
+                    <div class="torn-sticker torn-sticker-cyan project-category-badge stack-shadow-xs">
+                        // Web App
+                    </div>
+                    <div class="project-img-wrapper halftone-overlay">
+                        <img src="assets/images/project3.jpg" alt="MuaraJogja — Local Information Aggregator Yogyakarta"
+                            class="w-full h-full object-cover" width="800" height="600" loading="lazy" decoding="async"
+                            fetchpriority="low">
+                    </div>
+                </div>
+
+                <div class="project-card-content">
+                    <div class="project-dateline">Yogyakarta, Oct 2025 — July 2026<br>Special Report</div>
+                    <h3 class="headline-project mb-4">MuaraJogja<br>(Local Information Aggregator)</h3>
+                    <p class="lead-text mb-6">
+                        MuaraJogja is a full-stack local information aggregator for Yogyakarta
+                        that automatically collects, categorizes, and displays news from external sources
+                        via background data pipelines, paired with an admin dashboard for system monitoring and content
+                        management.
+                    </p>
+
+                    <!-- Project Metrics -->
+                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
+                        <span class="text-cyan">///METRICS:</span>
+                        <ul>
+                            <li>1,200+ news update kolom (feedback positive)</li>
+                            <li>Downtime autopipeline 0 (butuh perbaikan implementasi)</li>
+                            <li>2 jam efisiensi pembuatan konten admin harian</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-token">Laravel</span>
+                        <span class="tech-token">Livewire</span>
+                        <span class="tech-token">Cron Jobs</span>
+                        <span class="tech-token">Background Queue Workers</span>
+                        <span class="tech-token">Data Pipelines</span>
+                    </div>
+
+                    <div class="battle-log mb-8"
+                        style="border-left-color: var(--gold); background: rgba(224, 164, 21, 0.04);">
+                        <p><span class="battle-log-label" style="color: var(--gold);">PROBLEM:</span>
+                            Local news and updates about Yogyakarta are fragmented across numerous disparate platforms,
+                            leading to information overload and making it difficult for users to access centralized,
+                            well-categorized local updates.</p>
+                        <p><span class="battle-log-label" style="color: var(--gold);">RESULT:</span>
+                            Successfully centralized Yogyakarta's local content into a single platform by implementing a
+                            100% automated data pipeline, eliminating manual content curation while delivering a
+                            responsive user interface and a comprehensive admin management system.
+                        </p>
+                    </div>
+
+                    <!-- CTA Links -->
+                    <div class="mt-auto pt-4 flex flex-wrap gap-3">
+                        <!-- FILL: ganti dengan URL GitHub repository aktual -->
+                        <a href="https://github.com/ " target="_blank" rel="noopener noreferrer"
+                            class="btn btn-ghost btn-skew" @click="collectStamp(1)">
+                            <span>🔍 Inspect Architecture ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: ENGINEERING PHILOSOPHY
+         ============================================================ -->
+    <section id="log" class="section-padding">
+        <div class="container-text">
+
+            <div class="flex justify-between items-end mb-8 reveal">
+                <h2 class="headline-section">ENGINEERING<br>PHILOSOPHY</h2>
+                <div class="text-mono-sm text-ink opacity-70 mb-2">philosophy.config</div>
+            </div>
+
+            <!-- Terminal Window -->
+            <div class="terminal-window stack-shadow reveal reveal-delay-1">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dot terminal-dot-stamp"></div>
+                    <div class="terminal-dot terminal-dot-gold"></div>
+                    <div class="terminal-dot terminal-dot-cyan"></div>
+                    <div class="terminal-title-label">philosophy.config — zsh</div>
+                </div>
+
+                <div class="terminal-body">
+                    <!-- Prompt line -->
+                    <div class="mb-6 font-mono text-sm">
+                        <span class="term-cyan">yakobus@engineer</span>:<span class="term-magenta">~</span>$ cat
+                        ./philosophy.config
+                    </div>
+
+                    <!-- Pillar 01 -->
+                    <div class="philosophy-pillar mb-6">
+                        <div class="philosophy-pillar-header term-magenta">
+                            [ 01. PRAGMATIC PROBLEM SOLVING ]
+                        </div>
+                        <div class="philosophy-pillar-quote term-paper">
+                            &gt; "Adapting software architecture to overcome hardware &amp; network constraints."
+                        </div>
+                        <div class="philosophy-pillar-tags">
+                            <span class="term-tag">Constraint-Driven Design</span>
+                            <span class="term-tag">Wi-Fi Master-Client Arch</span>
+                            <span class="term-tag">Infrastructure Workarounds</span>
+                        </div>
+                        <div class="philosophy-pillar-evidence term-muted">
+                            # Proven: LAB SD — engineered Wi-Fi-based remote control to bypass absent LAN infrastructure
+                        </div>
+                    </div>
+
+                    <!-- Pillar 02 -->
+                    <div class="philosophy-pillar mb-6">
+                        <div class="philosophy-pillar-header term-cyan">
+                            [ 02. PERFORMANCE-FIRST ARCHITECTURE ]
+                        </div>
+                        <div class="philosophy-pillar-quote term-paper">
+                            &gt; "Leveraging background queues and automation to protect frontend responsiveness."
+                        </div>
+                        <div class="philosophy-pillar-tags">
+                            <span class="term-tag">Background Queue Workers</span>
+                            <span class="term-tag">Cron Job Automation</span>
+                            <span class="term-tag">Data Pipeline Design</span>
+                        </div>
+                        <div class="philosophy-pillar-evidence term-muted">
+                            # Proven: MuaraJogja — 100% automated pipeline, zero manual curation, UI stays non-blocking
+                        </div>
+                    </div>
+
+                    <!-- Pillar 03 -->
+                    <div class="philosophy-pillar mb-6">
+                        <div class="philosophy-pillar-header term-gold">
+                            [ 03. END-TO-END OWNERSHIP ]
+                        </div>
+                        <div class="philosophy-pillar-quote term-paper">
+                            &gt; "Bridging solid backend processing with clean, user-centric interfaces."
+                        </div>
+                        <div class="philosophy-pillar-tags">
+                            <span class="term-tag">Full-Stack Delivery</span>
+                            <span class="term-tag">Backend-to-UI Continuity</span>
+                            <span class="term-tag">Sole Developer Ownership</span>
+                        </div>
+                        <div class="philosophy-pillar-evidence term-muted">
+                            # Proven: Ngasem Profile — sole developer, end-to-end from DB schema to responsive UI
+                        </div>
+                    </div>
+
+                    <!-- Pillar 04 -->
+                    <div class="philosophy-pillar mb-6">
+                        <div class="philosophy-pillar-header" style="color: var(--paper); opacity: 0.75;">
+                            [ 04. RIGHT-SIZED SOLUTIONS ]
+                        </div>
+                        <div class="philosophy-pillar-quote term-paper">
+                            &gt; "Prioritizing simplicity and functionality over unnecessary complexity."
+                        </div>
+                        <div class="philosophy-pillar-tags">
+                            <span class="term-tag">Minimal Viable Architecture</span>
+                            <span class="term-tag">Purposeful Tech Choice</span>
+                            <span class="term-tag">No Over-Engineering</span>
+                        </div>
+                        <div class="philosophy-pillar-evidence term-muted">
+                            # Proven: Static HTML/CSS for Ngasem — right tool, right scope, zero unnecessary overhead
+                        </div>
+                    </div>
+
+                    <!-- Blinking cursor -->
+                    <div class="mt-2 font-mono text-sm flex items-center">
+                        <span class="term-cyan">yakobus@engineer</span>:<span class="term-magenta">~</span>$ <span
+                            class="terminal-cursor ml-1"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: TECHNICAL ARSENAL (Shibuya Sticker Bomb)
+         ============================================================ -->
+    <section id="status" class="section-padding arsenal-section relative overflow-hidden bg-dark-urban">
+
+        <!-- Dark Halftone / Grid Atmosphere Backdrop -->
+        <div class="arsenal-bg" aria-hidden="true"></div>
+
+        <!-- Hazard Caution Tape Ribbon (Diagonal Section Banner) -->
+        <div class="hazard-tape-ribbon" aria-hidden="true">
+            <div class="hazard-tape-track">
+                <span>// FULLSTACK DEVELOPER // TECHNICAL ARSENAL // CAUTION: HIGH PERFORMANCE // SHIBUYA STICKER BOMB
+                    // FULLSTACK DEVELOPER // TECHNICAL ARSENAL // CAUTION: HIGH PERFORMANCE // SHIBUYA STICKER BOMB
+                    //</span>
+            </div>
+        </div>
+
+        <!-- Tategaki Right (Desktop only) -->
+        <div class="tategaki tategaki-status" aria-hidden="true">ステータス</div>
+
+        <div class="container relative z-10">
+
+            <div class="sticker-collage-board reveal">
+
+                <!-- Background Manga & Streetwear Decals -->
+                <div class="decal-decorative decal-manga-1 rotate-pos-4" aria-hidden="true">
+                    <div class="manga-panel-content halftone-overlay">
+                        <div class="manga-screentone"></div>
+                        <div class="manga-speedlines"></div>
+                        <div class="manga-sfx">ズズズ</div>
+                    </div>
+                </div>
+
+                <div class="decal-decorative decal-manga-2 rotate-neg-5" aria-hidden="true">
+                    <div class="manga-panel-content halftone-overlay">
+                        <div class="manga-sfx-2">バーン</div>
+                    </div>
+                </div>
+
+                <div class="decal-decorative decal-barcode rotate-neg-6" aria-hidden="true">
+                    <div class="barcode-graphic"></div>
+                    <div class="barcode-text">SYS-90210-OK</div>
+                </div>
+
+                <div class="decal-decorative decal-caution rotate-pos-12" aria-hidden="true">
+                    <span class="caution-icon">⚠️</span>
+                    <span class="caution-text">CAUTION / 危険</span>
+                </div>
+
+                <!-- Central Hero Title Badge -->
+                <div class="decal-hero-title rotate-neg-3 stack-shadow">
+                    <div class="hero-title-badge-inner">
+                        <div class="hero-title-main">TECHNICAL</div>
+                        <div class="hero-title-sub">ARSENAL</div>
+                        <div class="hero-title-katakana">テクニカルアーセナル</div>
+                    </div>
+                </div>
+
+                <!-- Tech Stack Decals -->
+
+                <!-- Sticker 1: Laravel -->
+                <div class="decal-tech decal-pill decal-laravel rotate-pos-3" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 10 L28 10 L34 20 L28 30 L12 30 L6 20 Z" stroke="currentColor"
+                                stroke-width="2.5" fill="none" />
+                            <path d="M12 20 L28 20 M20 10 L20 30" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">LARAVEL</span>
+                        <span class="pill-katakana">ウェブフレームワーク</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>LARAVEL:</strong> Used in 4+ Projects: REST APIs, MVC Architecture, Queues & Eloquent
+                        ORM.
+                    </div>
+                </div>
+
+                <!-- Sticker 2: Tailwind CSS -->
+                <div class="decal-tech decal-pill decal-tailwind rotate-neg-4" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 22 Q14 14 20 22 T32 22" stroke="currentColor" stroke-width="4"
+                                stroke-linecap="round" fill="none" />
+                            <path d="M8 15 Q14 7 20 15 T32 15" stroke="currentColor" stroke-width="4"
+                                stroke-linecap="round" fill="none" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">Tailwind CSS</span>
+                        <span class="pill-katakana">CSSフレームワーク</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>TAILWIND CSS:</strong> Rapid UI prototyping, custom tokens, neo-brutalist & responsive
+                        layouts.
+                    </div>
+                </div>
+
+                <!-- Sticker 3: MySQL -->
+                <div class="decal-tech decal-pill decal-mysql rotate-pos-5" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="20" cy="12" rx="13" ry="5" stroke="currentColor" stroke-width="2.5" />
+                            <path d="M7 12 C7 12 7 24 7 24 C7 27.5 12.8 30 20 30 C27.2 30 33 27.5 33 24 L33 12"
+                                stroke="currentColor" stroke-width="2.5" />
+                            <line x1="7" y1="18" x2="33" y2="18" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">MySQL</span>
+                        <span class="pill-katakana">データベース</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>MYSQL:</strong> Relational schema design, query optimization, indexing & ACID
+                        transactions.
+                    </div>
+                </div>
+
+                <!-- Sticker 4: Alpine.js -->
+                <div class="decal-tech decal-pill decal-alpine rotate-neg-6" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 28 L20 10 L32 28" stroke="currentColor" stroke-width="3.5" fill="none"
+                                stroke-linejoin="round" />
+                            <path d="M14 28 L20 19 L26 28" stroke="currentColor" stroke-width="3" fill="none"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">Alpine.js</span>
+                        <span class="pill-katakana">JavaScriptライブラリ</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>ALPINE.JS:</strong> Lightweight client-side interactivity, reactive DOM states & UI
+                        components.
+                    </div>
+                </div>
+
+                <!-- Sticker 5: C++ -->
+                <div class="decal-tech decal-pill decal-cpp rotate-pos-7" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="2.5" />
+                            <path d="M16 16 C14 18 14 22 16 24" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" />
+                            <path d="M22 20 H26 M24 18 V22" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                            <path d="M28 20 H32 M30 18 V22" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">C++</span>
+                        <span class="pill-katakana">プログラミング言語</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>C++:</strong> Low-level algorithms, data structures, memory management & performance
+                        logic.
+                    </div>
+                </div>
+
+                <!-- Sticker 6: Figma -->
+                <div class="decal-tech decal-pill decal-figma rotate-neg-3" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="15" cy="12" r="5" stroke="currentColor" stroke-width="2" />
+                            <circle cx="25" cy="12" r="5" stroke="currentColor" stroke-width="2" />
+                            <circle cx="15" cy="20" r="5" stroke="currentColor" stroke-width="2" />
+                            <circle cx="25" cy="20" r="5" stroke="currentColor" stroke-width="2" />
+                            <path d="M15 28 A5 5 0 0 0 20 28 V25 H15 Z" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">Figma</span>
+                        <span class="pill-katakana">UI/UXデザイン</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>FIGMA:</strong> Wireframing, high-fidelity UI layout design, component systems & design
+                        specs.
+                    </div>
+                </div>
+
+                <!-- Sticker 7: Livewire -->
+                <div class="decal-tech decal-pill decal-livewire rotate-pos-2" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2.5" />
+                            <path d="M20 6 L20 34 M6 20 L34 20" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="pill-text">
+                        <span class="pill-name">Livewire</span>
+                        <span class="pill-katakana">リアクティブUI</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>LIVEWIRE:</strong> Full-stack reactive interfaces seamlessly integrated with Laravel.
+                    </div>
+                </div>
+
+                <!-- Sticker 8: REST API -->
+                <div class="decal-tech decal-pill decal-api rotate-neg-5" tabindex="0">
+                    <div class="peel-corner"></div>
+                    <div class="pill-text">
+                        <span class="pill-name">REST API</span>
+                        <span class="pill-katakana">データ通信</span>
+                    </div>
+                    <div class="decal-tooltip">
+                        <strong>REST API:</strong> Endpoint design, JSON payloads, token authentication & queue
+                        pipelines.
+                    </div>
+                </div>
+
+                <!-- Hanko Stamp Seal Decoration -->
+                <div class="decal-decorative decal-hanko-seal rotate-pos-15" aria-hidden="true">
+                    <div class="hanko-seal-inner">
+                        <div class="hanko-seal-text">品質<br>保証</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: CONTACT / MAIL
+         ============================================================ -->
+    <section id="mail" class="section-padding bg-paper relative">
+
+        <!-- Section Banner -->
+        <div class="section-banner mb-12 reveal">
+            <h2 class="headline-banner">05. TRANSMISSION & ISSUE REWARD</h2>
+        </div>
+
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Left Column: Zine Stamp Tracker & CV Download -->
+                <div class="reveal reveal-left">
+
+                    <!-- Read Progress Tracker Box -->
+                    <div class="stamp-tracker-box">
+                        <div class="stamp-tracker-title text-ink">
+                            <span>ISSUE READ PROGRESS</span>
+                            <span class="text-mono-sm text-magenta font-bold" x-text="stamps + '/3 STAMPS'">0/3
+                                STAMPS</span>
+                        </div>
+                        <p class="text-mono-sm opacity-75">
+                            Scroll & explore through the zine sections to collect authentication stamps.
+                        </p>
+
+                        <!-- Stamp Slots -->
+                        <div class="stamp-slots">
+                            <div class="stamp-slot">
+                                <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[0] }">
+                                    <span x-show="!stampsCollected[0]">01</span>
+                                    <span x-show="stampsCollected[0]">印</span>
+                                </div>
+                                <span class="stamp-label">HERO COVER</span>
+                            </div>
+                            <div class="stamp-slot">
+                                <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[1] }">
+                                    <span x-show="!stampsCollected[1]">02</span>
+                                    <span x-show="stampsCollected[1]">印</span>
+                                </div>
+                                <span class="stamp-label">PROJECTS</span>
+                            </div>
+                            <div class="stamp-slot">
+                                <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[2] }">
+                                    <span x-show="!stampsCollected[2]">03</span>
+                                    <span x-show="stampsCollected[2]">印</span>
+                                </div>
+                                <span class="stamp-label">ARSENAL</span>
+                            </div>
+                        </div>
+
+                        <div class="text-mono-sm text-center opacity-60">
+                            Status: <span
+                                x-text="stamps === 3 ? 'ALL STAMPS VERIFIED ✓' : 'EXPLORE SECTIONS TO COMPLETE'">EXPLORE
+                                SECTIONS TO COMPLETE</span>
+                        </div>
+                    </div>
+
+                    <!-- Reward Box CV -->
+                    <div class="reward-cv-box reveal reveal-delay-2">
+                        <div class="torn-sticker torn-sticker-gold stack-shadow-xs mb-2">
+                            // VERIFIED READER REWARD
+                        </div>
+                        <h3 class="font-display text-xl text-gold uppercase">TECHNICAL RESUME MATRIX</h3>
+                        <p class="reward-cv-text">
+                            Get the complete official CV containing in-depth experience details, backend architecture
+                            specs, and contact credentials.
+                        </p>
+                        <!-- FILL: ganti dengan path CV PDF aktual -->
+                        <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-stamp btn-skew w-full mt-2 justify-center">
+                            <span>📄 DOWNLOAD OFFICIAL CV (PDF)</span>
+                        </a>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-links-bar reveal reveal-delay-3">
+                        <!-- FILL: ganti dengan URL LinkedIn aktual -->
+                        <a href="https://linkedin.com/in/ " target="_blank" rel="noopener noreferrer"
+                            class="social-link-item">
+                            <span>🔗 LINKEDIN</span>
+                        </a>
+                        <!-- FILL: ganti dengan URL GitHub aktual -->
+                        <a href="https://github.com/ " target="_blank" rel="noopener noreferrer"
+                            class="social-link-item">
+                            <span>💻 GITHUB</span>
+                        </a>
+                        <!-- FILL: ganti dengan email aktual -->
+                        <a href="mailto:dimasjuan@gmail.com" class="social-link-item">
+                            <span>✉️ EMAIL</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Web3Forms Contact Form -->
+                <div class="contact-form-card reveal reveal-delay-1">
+
+                    <div class="flex justify-between items-center mb-6 border-b-2 border-ink pb-3">
+                        <h3 class="font-display text-2xl uppercase">INITIATE CONTACT</h3>
+                        <span class="text-mono-sm text-magenta font-bold">// DIRECT TRANSMISSION</span>
+                    </div>
+
+                    <!-- Web3Forms Integration -->
+                    <form action="https://api.web3forms.com/submit" method="POST" role="form"
+                        aria-label="Formulir Kontak — Kirim pesan ke Yakobus Dimas" id="contact-form">
+                        <!-- FILL: Ganti YOUR_WEB3FORMS_ACCESS_KEY dengan Access Key aktual dari web3forms.com -->
+                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="Pesan Portfolio Baru dari Website">
+                        <input type="hidden" name="from_name" value="Portfolio Contact Form">
+
+                        <!-- Anti-Spam Honeypot Botcheck -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none;" aria-hidden="true">
+
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">SENDER NAME / NAMA</label>
+                            <input type="text" id="contact-name" name="name" class="form-input"
+                                placeholder="e.g. Alex Mercer" aria-label="Nama Pengirim" aria-required="true"
+                                autocomplete="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">RETURN EMAIL / ALAMAT EMAIL</label>
+                            <input type="email" id="contact-email" name="email" class="form-input"
+                                placeholder="e.g. alex@company.com" aria-label="Alamat Email Pengirim"
+                                aria-required="true" autocomplete="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">TRANSMISSION MESSAGE / PESAN</label>
+                            <textarea id="contact-message" name="message" rows="4" class="form-textarea"
+                                placeholder="Tuliskan pesan atau penawaran proyek di sini..." aria-label="Isi Pesan"
+                                aria-required="true" required></textarea>
+                        </div>
+
+                        <p class="text-mono-sm opacity-50 mt-2" style="font-size:0.7rem;">
+                            * Form ini diverifikasi oleh Web3Forms. Pesan kamu akan dikirim langsung ke inbox.
+                        </p>
+
+                        <button type="submit" id="submit-btn"
+                            class="btn btn-primary btn-skew w-full justify-center mt-4" aria-label="Kirim pesan">
+                            <span>✉️ TRANSMIT MESSAGE</span>
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SITE FOOTER
+         ============================================================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-brand">SHIBUYA EDITORIAL ENGINEER ZINE</div>
+            <p class="footer-copy">
+                Designed & Built by <strong>Yakobus Dimas Juan W</strong> — Backend Systems Engineer © 2026.
+            </p>
+            <p class="footer-sub">
+                Handcrafted using Pure HTML5, Vanilla CSS Design System & Alpine.js. Built in Yogyakarta, Indonesia.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         MODAL: INSPECT ARCHITECTURE
+         ============================================================ -->
+    <div id="modal-overlay" class="modal-overlay" x-show="modalOpen" x-transition.opacity style="display: none;"
+        @click.self="closeModal()" @keydown.escape.window="closeModal()">
+
+        <div class="modal-card stack-shadow" @click.stop>
+            <!-- Close Button -->
+            <button class="modal-close-btn" @click="closeModal()" aria-label="Close Architecture Modal">×</button>
+
+            <!-- Header Sticker Badge -->
+            <div class="mb-4">
+                <div class="torn-sticker torn-sticker-gold stack-shadow-xs">
+                    // ARCHITECTURE SPECIFICATION
+                </div>
+            </div>
+
+            <!-- Dynamic Content based on activeProject ('lab', 'muara', 'logic') -->
+            <template x-if="activeProject === 'lab'">
+                <div>
+                    <div class="text-mono-sm text-magenta font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 01</div>
+                    <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">Smart Lab Booking System</h3>
+                    <div
+                        class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                        <div class="term-cyan mb-2 font-bold">&gt; SYSTEM ARCHITECTURE & DATA FLOW</div>
+                        <p class="text-paper opacity-90 mb-3">
+                            Responsive Single-Page Web Application designed to centralize and automate hamlet identity,
+                            tourism portals, and public services for Padukuhan Ngasem.
+                        </p>
+                        <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                            <div>• FRONTEND: Responsive HTML5, Custom Design System, Single-Page Architecture</div>
+                            <div>• OWNERSHIP: End-to-end sole developer from database schema to UI delivery</div>
+                            <div>• IMPACT: Centralized 100% offline hamlet data into accessible web portal</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template x-if="activeProject === 'muara'">
+                <div>
+                    <div class="text-mono-sm text-cyan font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 02</div>
+                    <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">LAB SD Master-Client System
+                    </h3>
+                    <div
+                        class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                        <div class="term-cyan mb-2 font-bold">&gt; WI-FI MASTER-CLIENT ARCHITECTURE</div>
+                        <p class="text-paper opacity-90 mb-3">
+                            Full-stack management platform built with Laravel & Livewire. Solved absent physical LAN
+                            infrastructure by engineering remote control signals over Wi-Fi network.
+                        </p>
+                        <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                            <div>• CONTROLLER: Real-time Livewire reactive web sockets & remote commands</div>
+                            <div>• NETWORK: Custom Wi-Fi daemon script running on client PCs</div>
+                            <div>• IMPACT: Reactivated long-dormant lab facility without physical rewiring overhead
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template x-if="activeProject === 'logic'">
+                <div>
+                    <div class="text-mono-sm text-gold font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 03</div>
+                    <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">MuaraJogja Data Aggregator
+                    </h3>
+                    <div
+                        class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                        <div class="term-cyan mb-2 font-bold">&gt; AUTOMATED BACKGROUND QUEUE PIPELINE</div>
+                        <p class="text-paper opacity-90 mb-3">
+                            Local information aggregator operating 100% automated background ingestion data pipelines
+                            powered by Laravel Queue Workers & Cron jobs.
+                        </p>
+                        <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                            <div>• QUEUES: Asynchronous background scraping & data normalization workers</div>
+                            <div>• DATABASE: Indexed MySQL storage with deduplication hashing</div>
+                            <div>• IMPACT: Fully automated local news stream, zero manual content curation required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Action Button -->
+            <div class="mt-6 text-right">
+                <button class="btn btn-secondary btn-skew" @click="closeModal()">
+                    <span>CLOSE REPORT ×</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MAIN APPLICATION SCRIPT
+         ============================================================ -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

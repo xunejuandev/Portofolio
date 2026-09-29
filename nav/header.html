@@ -1,0 +1,60 @@
+<!-- ============================================================
+     HEADER — Desktop Ribbon Nav + Mobile FAB
+     Edit file ini untuk mengubah navigasi, menu items, atau link CV
+     ============================================================ -->
+
+<!-- Desktop Ribbon Nav (Hidden on Mobile, Visible on lg+) -->
+<div class="nav-ribbon-wrapper z-nav">
+    <nav class="nav-ribbon" aria-label="Main Navigation">
+        <div class="nav-brand">
+            $ nav
+        </div>
+        <a href="#start" class="nav-item" :class="{ 'is-active': activeSection === 'start' }"
+            @click="smoothScroll($event, 'start')">
+            01. HOME
+        </a>
+        <a href="#projects" class="nav-item" :class="{ 'is-active': activeSection === 'projects' }"
+            @click="smoothScroll($event, 'projects')">
+            02. PROJECTS
+        </a>
+        <a href="#log" class="nav-item" :class="{ 'is-active': activeSection === 'log' }"
+            @click="smoothScroll($event, 'log')">
+            03. LOG
+        </a>
+        <a href="#status" class="nav-item" :class="{ 'is-active': activeSection === 'status' }"
+            @click="smoothScroll($event, 'status')">
+            04. STATUS
+        </a>
+        <a href="#mail" class="nav-item" :class="{ 'is-active': activeSection === 'mail' }"
+            @click="smoothScroll($event, 'mail')">
+            05. CONTACT
+        </a>
+        <!-- FILL: ganti dengan path CV PDF aktual -->
+        <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+            class="nav-item nav-item-cv">
+            📄 CV
+        </a>
+    </nav>
+</div>
+
+<!-- Mobile FAB Nav (Visible on Mobile, Hidden on lg+) -->
+<div class="nav-fab-wrapper z-nav">
+    <!-- Vertical Menu (Expands upwards) -->
+    <nav class="nav-fab-menu" :class="{ 'is-open': mobileMenuOpen }" aria-label="Mobile Navigation">
+        <a href="#start" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'start')">01. HOME</a>
+        <a href="#projects" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'projects')">02. PROJECTS</a>
+        <a href="#log" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'log')">03. LOG</a>
+        <a href="#status" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'status')">04. STATUS</a>
+        <a href="#mail" class="nav-fab-item" @click="mobileMenuOpen = false; smoothScroll($event, 'mail')">05. CONTACT</a>
+        <!-- FILL: ganti dengan path CV PDF aktual -->
+        <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+            class="nav-fab-item nav-fab-item-cv">📄 CV</a>
+    </nav>
+
+    <!-- FAB Button -->
+    <button class="nav-fab-btn" :class="{ 'is-open': mobileMenuOpen }" @click="mobileMenuOpen = !mobileMenuOpen"
+        aria-label="Toggle Navigation" aria-expanded="false" :aria-expanded="mobileMenuOpen.toString()">
+        <span x-show="!mobileMenuOpen">$_</span>
+        <span x-show="mobileMenuOpen">×</span>
+    </button>
+</div>

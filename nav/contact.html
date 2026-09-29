@@ -1,0 +1,166 @@
+<!-- ============================================================
+     SECTION 5: CONTACT + FOOTER (#mail)
+     Edit file ini untuk mengubah form, social links, atau CV path
+     ============================================================ -->
+<section id="mail" class="section-padding bg-paper relative">
+
+    <!-- Section Banner -->
+    <div class="section-banner mb-12 reveal">
+        <h2 class="headline-banner">05. TRANSMISSION &amp; ISSUE REWARD</h2>
+    </div>
+
+    <div class="container">
+        <div class="contact-grid">
+
+            <!-- Left Column: Zine Stamp Tracker & CV Download -->
+            <div class="reveal reveal-left">
+
+                <!-- Read Progress Tracker Box -->
+                <div class="stamp-tracker-box">
+                    <div class="stamp-tracker-title text-ink">
+                        <span>ISSUE READ PROGRESS</span>
+                        <span class="text-mono-sm text-magenta font-bold" x-text="stamps + '/3 STAMPS'">0/3
+                            STAMPS</span>
+                    </div>
+                    <p class="text-mono-sm opacity-75">
+                        Scroll &amp; explore through the zine sections to collect authentication stamps.
+                    </p>
+
+                    <!-- Stamp Slots -->
+                    <div class="stamp-slots">
+                        <div class="stamp-slot">
+                            <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[0] }">
+                                <span x-show="!stampsCollected[0]">01</span>
+                                <span x-show="stampsCollected[0]">印</span>
+                            </div>
+                            <span class="stamp-label">HERO COVER</span>
+                        </div>
+                        <div class="stamp-slot">
+                            <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[1] }">
+                                <span x-show="!stampsCollected[1]">02</span>
+                                <span x-show="stampsCollected[1]">印</span>
+                            </div>
+                            <span class="stamp-label">PROJECTS</span>
+                        </div>
+                        <div class="stamp-slot">
+                            <div class="stamp-circle" :class="{ 'is-stamped': stampsCollected[2] }">
+                                <span x-show="!stampsCollected[2]">03</span>
+                                <span x-show="stampsCollected[2]">印</span>
+                            </div>
+                            <span class="stamp-label">ARSENAL</span>
+                        </div>
+                    </div>
+
+                    <div class="text-mono-sm text-center opacity-60">
+                        Status: <span
+                            x-text="stamps === 3 ? 'ALL STAMPS VERIFIED ✓' : 'EXPLORE SECTIONS TO COMPLETE'">EXPLORE
+                            SECTIONS TO COMPLETE</span>
+                    </div>
+                </div>
+
+                <!-- Reward Box CV -->
+                <div class="reward-cv-box reveal reveal-delay-2">
+                    <div class="torn-sticker torn-sticker-gold stack-shadow-xs mb-2">
+                        // VERIFIED READER REWARD
+                    </div>
+                    <h3 class="font-display text-xl text-gold uppercase">TECHNICAL RESUME MATRIX</h3>
+                    <p class="reward-cv-text">
+                        Get the complete official CV containing in-depth experience details, backend architecture specs,
+                        and contact credentials.
+                    </p>
+                    <!-- FILL: ganti dengan path CV PDF aktual -->
+                    <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-stamp btn-skew w-full mt-2 justify-center">
+                        <span>📄 DOWNLOAD OFFICIAL CV (PDF)</span>
+                    </a>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="social-links-bar reveal reveal-delay-3">
+                    <!-- FILL: ganti dengan URL LinkedIn aktual -->
+                    <a href="https://linkedin.com/in/ " target="_blank" rel="noopener noreferrer"
+                        class="social-link-item">
+                        <span>🔗 LINKEDIN</span>
+                    </a>
+                    <!-- FILL: ganti dengan URL GitHub aktual -->
+                    <a href="https://github.com/ " target="_blank" rel="noopener noreferrer" class="social-link-item">
+                        <span>💻 GITHUB</span>
+                    </a>
+                    <!-- FILL: ganti dengan email aktual -->
+                    <a href="mailto:dimasjuan@gmail.com" class="social-link-item">
+                        <span>✉️ EMAIL</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Web3Forms Contact Form -->
+            <div class="contact-form-card reveal reveal-delay-1">
+
+                <div class="flex justify-between items-center mb-6 border-b-2 border-ink pb-3">
+                    <h3 class="font-display text-2xl uppercase">INITIATE CONTACT</h3>
+                    <span class="text-mono-sm text-magenta font-bold">// DIRECT TRANSMISSION</span>
+                </div>
+
+                <!-- Web3Forms Integration -->
+                <form action="https://api.web3forms.com/submit" method="POST" role="form"
+                    aria-label="Formulir Kontak — Kirim pesan ke Yakobus Dimas" id="contact-form">
+                    <!-- FILL: Ganti YOUR_WEB3FORMS_ACCESS_KEY dengan Access Key aktual dari web3forms.com -->
+                    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" value="Pesan Portfolio Baru dari Website">
+                    <input type="hidden" name="from_name" value="Portfolio Contact Form">
+
+                    <!-- Anti-Spam Honeypot Botcheck -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display:none;" aria-hidden="true">
+
+                    <div class="form-group">
+                        <label for="contact-name" class="form-label">SENDER NAME / NAMA</label>
+                        <input type="text" id="contact-name" name="name" class="form-input"
+                            placeholder="e.g. Alex Mercer" aria-label="Nama Pengirim" aria-required="true"
+                            autocomplete="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email" class="form-label">RETURN EMAIL / ALAMAT EMAIL</label>
+                        <input type="email" id="contact-email" name="email" class="form-input"
+                            placeholder="e.g. alex@company.com" aria-label="Alamat Email Pengirim" aria-required="true"
+                            autocomplete="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-message" class="form-label">TRANSMISSION MESSAGE / PESAN</label>
+                        <textarea id="contact-message" name="message" rows="4" class="form-textarea"
+                            placeholder="Tuliskan pesan atau penawaran proyek di sini..." aria-label="Isi Pesan"
+                            aria-required="true" required></textarea>
+                    </div>
+
+                    <p class="text-mono-sm opacity-50 mt-2" style="font-size:0.7rem;">
+                        * Form ini diverifikasi oleh Web3Forms. Pesan kamu akan dikirim langsung ke inbox.
+                    </p>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary btn-skew w-full justify-center mt-4"
+                        aria-label="Kirim pesan">
+                        <span>✉️ TRANSMIT MESSAGE</span>
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     SITE FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-brand">SHIBUYA EDITORIAL ENGINEER ZINE</div>
+        <p class="footer-copy">
+            Designed &amp; Built by <strong>Yakobus Dimas Juan W</strong> — Backend Systems Engineer © 2026.
+        </p>
+        <p class="footer-sub">
+            Handcrafted using Pure HTML5, Vanilla CSS Design System &amp; Alpine.js. Built in Yogyakarta, Indonesia.
+        </p>
+    </div>
+</footer>

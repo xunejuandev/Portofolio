@@ -1,0 +1,44 @@
+/* ============================================================
+   UTILITIES.CSS
+   Yakobus Dimas | Backend Systems Engineer
+   ------------------------------------------------------------
+   Berisi HANYA class yang tidak ada di style.css:
+   - Project Metrics Block (Phase 3)
+   ============================================================ */
+
+/* ============================================
+   PROJECT METRICS BLOCK (Phase 3)
+   ============================================ */
+.project-metrics {
+  position: relative;
+  border-left: 3px solid var(--cyan);
+  line-height: 1.6;
+}
+
+.project-metrics .text-cyan {
+  display: block;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+.project-metrics ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-metrics ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.project-metrics ul li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: bold;
+}

@@ -1,0 +1,90 @@
+<!-- ============================================================
+     MODAL: INSPECT ARCHITECTURE
+     Edit file ini untuk mengubah konten spesifikasi arsitektur per project
+     ============================================================ -->
+<div id="modal-overlay" class="modal-overlay" x-show="modalOpen" x-transition.opacity style="display: none;"
+    @click.self="closeModal()" @keydown.escape.window="closeModal()">
+
+    <div class="modal-card stack-shadow" @click.stop>
+        <!-- Close Button -->
+        <button class="modal-close-btn" @click="closeModal()" aria-label="Close Architecture Modal">×</button>
+
+        <!-- Header Sticker Badge -->
+        <div class="mb-4">
+            <div class="torn-sticker torn-sticker-gold stack-shadow-xs">
+                // ARCHITECTURE SPECIFICATION
+            </div>
+        </div>
+
+        <!-- Project 1: Ngasem / Smart Lab Booking -->
+        <template x-if="activeProject === 'lab'">
+            <div>
+                <div class="text-mono-sm text-magenta font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 01</div>
+                <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">Smart Lab Booking System</h3>
+                <div class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                    <div class="term-cyan mb-2 font-bold">&gt; SYSTEM ARCHITECTURE &amp; DATA FLOW</div>
+                    <p class="text-paper opacity-90 mb-3">
+                        Responsive Single-Page Web Application designed to centralize and automate hamlet identity, tourism portals, and public services for Padukuhan Ngasem.
+                    </p>
+                    <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                        <div>• FRONTEND: Responsive HTML5, Custom Design System, Single-Page Architecture</div>
+                        <div>• OWNERSHIP: End-to-end sole developer from database schema to UI delivery</div>
+                        <div>• IMPACT: Centralized 100% offline hamlet data into accessible web portal</div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Project 2: LAB SD -->
+        <template x-if="activeProject === 'muara'">
+            <div>
+                <div class="text-mono-sm text-cyan font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 02</div>
+                <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">LAB SD Master-Client System</h3>
+                <div class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                    <div class="term-cyan mb-2 font-bold">&gt; WI-FI MASTER-CLIENT ARCHITECTURE</div>
+                    <p class="text-paper opacity-90 mb-3">
+                        Full-stack management platform built with Laravel &amp; Livewire. Solved absent physical LAN infrastructure by engineering remote control signals over Wi-Fi network.
+                    </p>
+                    <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                        <div>• CONTROLLER: Real-time Livewire reactive web sockets &amp; remote commands</div>
+                        <div>• NETWORK: Custom Wi-Fi daemon script running on client PCs</div>
+                        <div>• IMPACT: Reactivated long-dormant lab facility without physical rewiring overhead</div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Project 3: MuaraJogja -->
+        <template x-if="activeProject === 'logic'">
+            <div>
+                <div class="text-mono-sm text-gold font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 03</div>
+                <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">MuaraJogja Data Aggregator</h3>
+                <div class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
+                    <div class="term-cyan mb-2 font-bold">&gt; AUTOMATED BACKGROUND QUEUE PIPELINE</div>
+                    <p class="text-paper opacity-90 mb-3">
+                        Local information aggregator operating 100% automated background ingestion data pipelines powered by Laravel Queue Workers &amp; Cron jobs.
+                    </p>
+                    <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
+                        <div>• QUEUES: Asynchronous background scraping &amp; data normalization workers</div>
+                        <div>• DATABASE: Indexed MySQL storage with deduplication hashing</div>
+                        <div>• IMPACT: Fully automated local news stream, zero manual content curation required</div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Action Button -->
+        <div class="mt-6 text-right">
+            <button class="btn btn-secondary btn-skew" @click="closeModal()">
+                <span>CLOSE REPORT ×</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MAIN APPLICATION SCRIPT
+     ============================================================ -->
+<script src="js/main.js"></script>
+</body>
+</html>
