@@ -1,9 +1,0 @@
-{
-  "name": "shibuya-editorial-portfolio",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Portfolio Website for Yakobus Dimas Juan W",
-  "scripts": {
-    "build": "node build.js"
-  }
-}
