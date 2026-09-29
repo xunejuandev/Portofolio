@@ -1,3 +1,7 @@
+<!-- ============================================================
+     HEAD — SEO, Meta, CSS, JSON-LD
+     Edit file ini untuk mengubah metadata, title, atau dependencies
+     ============================================================ -->
 <!DOCTYPE html>
 <html lang="id" x-data="portfolioApp()" x-init="init()">
 
@@ -46,7 +50,7 @@
     <!-- Alpine.js (Defer for performance) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Structured Data: JSON-LD Person Schema (Phase 5) -->
+    <!-- Structured Data: JSON-LD Person Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -70,10 +74,10 @@
 </head>
 
 <body class="grid-blueprint" :class="{ 'overflow-hidden': modalOpen }">
-
     <!-- ============================================================
-         GLOBAL NAVIGATION
-         ============================================================ -->
+     HEADER — Desktop Ribbon Nav + Mobile FAB
+     Edit file ini untuk mengubah navigasi, menu items, atau link CV
+     ============================================================ -->
 
     <!-- Desktop Ribbon Nav (Hidden on Mobile, Visible on lg+) -->
     <div class="nav-ribbon-wrapper z-nav">
@@ -136,16 +140,15 @@
     </div>
 
     <!-- ============================================================
-         SECTION 1: HERO / COVER
-         ============================================================ -->
+     SECTION 1: HERO / COVER (#start)
+     Edit file ini untuk mengubah nama, tagline, foto profil, atau CTA buttons
+     ============================================================ -->
     <section id="start" class="section-padding relative bg-paper overflow-hidden" style="min-height: 100vh;">
 
         <!-- Watermark Code (Background) -->
         <div class="code-watermark" aria-hidden="true">
             <pre>
-&lt;
-
-?php
+&lt;?php
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -289,8 +292,9 @@ class SystemController extends Controller
     </section>
 
     <!-- ============================================================
-         SECTION 2: PROJECTS
-         ============================================================ -->
+     SECTION 2: PROJECTS (#projects)
+     Edit file ini untuk menambah/mengubah project cards, metrics, atau tech stack
+     ============================================================ -->
     <section id="projects" class="section-padding">
 
         <!-- Section Banner -->
@@ -300,7 +304,7 @@ class SystemController extends Controller
 
         <div class="container max-w-2xl lg:max-w-none">
 
-            <!-- Project 1 -->
+            <!-- Project 1: Ngasem -->
             <div class="project-card reveal reveal-delay-1">
                 <!-- Image Column -->
                 <div class="project-card-img-col">
@@ -326,16 +330,6 @@ class SystemController extends Controller
                         sections for village updates, tourism potential, and a media gallery, establishing a functional
                         digital identity to increase public exposure and engagement.
                     </p>
-
-                    <!-- Project Metrics -->
-                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
-                        <span class="text-cyan">///METRICS:</span>
-                        <ul>
-                            <li>15+ new users aktif dalam 1 bulan</li>
-                            <li>40% peningkatan turun konten (downloads)</li>
-                            <li>0 downtime selama 6 bulan operasi</li>
-                        </ul>
-                    </div>
 
                     <!-- Tech Stack Tokens -->
                     <div class="flex flex-wrap gap-2 mb-6">
@@ -371,14 +365,15 @@ class SystemController extends Controller
                 </div>
             </div>
 
-            <!-- Project 2 -->
+            <!-- Project 2: LAB SD -->
             <div class="project-card project-card-alt reveal reveal-delay-2">
                 <div class="project-card-img-col">
                     <div class="torn-sticker torn-sticker-cyan project-category-badge stack-shadow-xs">
                         // Web App
                     </div>
                     <div class="project-img-wrapper halftone-overlay">
-                        <img src="assets/images/project2.jpg" alt="LAB SD Booking & Inventory System — Laravel Livewire"
+                        <img src="assets/images/project2.jpg"
+                            alt="LAB SD Booking &amp; Inventory System — Laravel Livewire"
                             class="w-full h-full object-cover" width="800" height="600" loading="lazy" decoding="async"
                             fetchpriority="low">
                     </div>
@@ -386,7 +381,7 @@ class SystemController extends Controller
 
                 <div class="project-card-content">
                     <div class="project-dateline">Yogyakarta, Jan 2026 — Feb 2026<br>Special Report</div>
-                    <h3 class="headline-project mb-4">LAB SD <br>Booking & Inventory System</h3>
+                    <h3 class="headline-project mb-4">LAB SD <br>Booking &amp; Inventory System</h3>
                     <p class="lead-text mb-6">
                         A full-stack management platform built to facilitate the reactivation of a long-dormant Data
                         Structure Laboratory. The system provides a smart booking solution for students and faculty to
@@ -394,16 +389,6 @@ class SystemController extends Controller
                         master-client architecture, enabling administrators to centrally monitor and manage client PCs
                         remotely over a Wi-Fi network, bypassing traditional physical LAN constraints.
                     </p>
-
-                    <!-- Project Metrics -->
-                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
-                        <span class="text-cyan">///METRICS:</span>
-                        <ul>
-                            <li>95% terjadwal booking system (ai-ready)</li>
-                            <li>2,000 user kampus menawarkan 98% approval</li>
-                            <li>1.5x boost di nilai kepuasan lab (survey)</li>
-                        </ul>
-                    </div>
 
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="tech-token">Laravel</span>
@@ -419,8 +404,7 @@ class SystemController extends Controller
                             The university needed to reactivate a long-unused laboratory but lacked a structured system
                             for students and faculty to reserve PCs, workspaces (clusters), and equipment. Additionally,
                             the absence of functional LAN infrastructure prevented administrators from monitoring and
-                            controlling
-                            the lab computers centrally.
+                            controlling the lab computers centrally.
                         </p>
                         <p><span class="battle-log-label" style="color: var(--cyan);">RESULT:</span>
                             Successfully facilitated the lab's reactivation by delivering a unified digital platform
@@ -441,7 +425,7 @@ class SystemController extends Controller
                 </div>
             </div>
 
-            <!-- Project 3 -->
+            <!-- Project 3: MuaraJogja -->
             <div class="project-card reveal reveal-delay-3">
                 <div class="project-card-img-col">
                     <div class="torn-sticker torn-sticker-cyan project-category-badge stack-shadow-xs">
@@ -463,16 +447,6 @@ class SystemController extends Controller
                         via background data pipelines, paired with an admin dashboard for system monitoring and content
                         management.
                     </p>
-
-                    <!-- Project Metrics -->
-                    <div class="project-metrics mb-4 p-3 bg-ink text-paper rounded font-mono text-sm">
-                        <span class="text-cyan">///METRICS:</span>
-                        <ul>
-                            <li>1,200+ news update kolom (feedback positive)</li>
-                            <li>Downtime autopipeline 0 (butuh perbaikan implementasi)</li>
-                            <li>2 jam efisiensi pembuatan konten admin harian</li>
-                        </ul>
-                    </div>
 
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="tech-token">Laravel</span>
@@ -508,10 +482,6 @@ class SystemController extends Controller
 
         </div>
     </section>
-
-    <!-- ============================================================
-         SECTION 3: ENGINEERING PHILOSOPHY
-         ============================================================ -->
     <section id="log" class="section-padding">
         <div class="container-text">
 
@@ -619,9 +589,6 @@ class SystemController extends Controller
         </div>
     </section>
 
-    <!-- ============================================================
-         SECTION 4: TECHNICAL ARSENAL (Shibuya Sticker Bomb)
-         ============================================================ -->
     <section id="status" class="section-padding arsenal-section relative overflow-hidden bg-dark-urban">
 
         <!-- Dark Halftone / Grid Atmosphere Backdrop -->
@@ -851,13 +818,14 @@ class SystemController extends Controller
     </section>
 
     <!-- ============================================================
-         SECTION 5: CONTACT / MAIL
-         ============================================================ -->
+     SECTION 5: CONTACT + FOOTER (#mail)
+     Edit file ini untuk mengubah form, social links, atau CV path
+     ============================================================ -->
     <section id="mail" class="section-padding bg-paper relative">
 
         <!-- Section Banner -->
         <div class="section-banner mb-12 reveal">
-            <h2 class="headline-banner">05. TRANSMISSION & ISSUE REWARD</h2>
+            <h2 class="headline-banner">05. TRANSMISSION &amp; ISSUE REWARD</h2>
         </div>
 
         <div class="container">
@@ -874,7 +842,7 @@ class SystemController extends Controller
                                 STAMPS</span>
                         </div>
                         <p class="text-mono-sm opacity-75">
-                            Scroll & explore through the zine sections to collect authentication stamps.
+                            Scroll &amp; explore through the zine sections to collect authentication stamps.
                         </p>
 
                         <!-- Stamp Slots -->
@@ -917,7 +885,8 @@ class SystemController extends Controller
                         <h3 class="font-display text-xl text-gold uppercase">TECHNICAL RESUME MATRIX</h3>
                         <p class="reward-cv-text">
                             Get the complete official CV containing in-depth experience details, backend architecture
-                            specs, and contact credentials.
+                            specs,
+                            and contact credentials.
                         </p>
                         <!-- FILL: ganti dengan path CV PDF aktual -->
                         <a href="assets/docs/x9k2m4/Yakobus_Dimas_CV.pdf" target="_blank" rel="noopener noreferrer"
@@ -1003,23 +972,23 @@ class SystemController extends Controller
     </section>
 
     <!-- ============================================================
-         SITE FOOTER
-         ============================================================ -->
+     SITE FOOTER
+     ============================================================ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-brand">SHIBUYA EDITORIAL ENGINEER ZINE</div>
             <p class="footer-copy">
-                Designed & Built by <strong>Yakobus Dimas Juan W</strong> — Backend Systems Engineer © 2026.
+                Designed &amp; Built by <strong>Yakobus Dimas Juan W</strong> — Backend Systems Engineer © 2026.
             </p>
             <p class="footer-sub">
-                Handcrafted using Pure HTML5, Vanilla CSS Design System & Alpine.js. Built in Yogyakarta, Indonesia.
+                Handcrafted using Pure HTML5, Vanilla CSS Design System &amp; Alpine.js. Built in Yogyakarta, Indonesia.
             </p>
         </div>
     </footer>
-
     <!-- ============================================================
-         MODAL: INSPECT ARCHITECTURE
-         ============================================================ -->
+     MODAL: INSPECT ARCHITECTURE
+     Edit file ini untuk mengubah konten spesifikasi arsitektur per project
+     ============================================================ -->
     <div id="modal-overlay" class="modal-overlay" x-show="modalOpen" x-transition.opacity style="display: none;"
         @click.self="closeModal()" @keydown.escape.window="closeModal()">
 
@@ -1034,14 +1003,14 @@ class SystemController extends Controller
                 </div>
             </div>
 
-            <!-- Dynamic Content based on activeProject ('lab', 'muara', 'logic') -->
+            <!-- Project 1: Ngasem / Smart Lab Booking -->
             <template x-if="activeProject === 'lab'">
                 <div>
                     <div class="text-mono-sm text-magenta font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 01</div>
                     <h3 class="font-display text-2xl md:text-3xl text-ink uppercase mb-4">Smart Lab Booking System</h3>
                     <div
                         class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
-                        <div class="term-cyan mb-2 font-bold">&gt; SYSTEM ARCHITECTURE & DATA FLOW</div>
+                        <div class="term-cyan mb-2 font-bold">&gt; SYSTEM ARCHITECTURE &amp; DATA FLOW</div>
                         <p class="text-paper opacity-90 mb-3">
                             Responsive Single-Page Web Application designed to centralize and automate hamlet identity,
                             tourism portals, and public services for Padukuhan Ngasem.
@@ -1055,6 +1024,7 @@ class SystemController extends Controller
                 </div>
             </template>
 
+            <!-- Project 2: LAB SD -->
             <template x-if="activeProject === 'muara'">
                 <div>
                     <div class="text-mono-sm text-cyan font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 02</div>
@@ -1064,11 +1034,11 @@ class SystemController extends Controller
                         class="p-4 bg-ink text-paper rounded mb-4 font-mono text-sm leading-relaxed border-2 border-paper">
                         <div class="term-cyan mb-2 font-bold">&gt; WI-FI MASTER-CLIENT ARCHITECTURE</div>
                         <p class="text-paper opacity-90 mb-3">
-                            Full-stack management platform built with Laravel & Livewire. Solved absent physical LAN
+                            Full-stack management platform built with Laravel &amp; Livewire. Solved absent physical LAN
                             infrastructure by engineering remote control signals over Wi-Fi network.
                         </p>
                         <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
-                            <div>• CONTROLLER: Real-time Livewire reactive web sockets & remote commands</div>
+                            <div>• CONTROLLER: Real-time Livewire reactive web sockets &amp; remote commands</div>
                             <div>• NETWORK: Custom Wi-Fi daemon script running on client PCs</div>
                             <div>• IMPACT: Reactivated long-dormant lab facility without physical rewiring overhead
                             </div>
@@ -1077,6 +1047,7 @@ class SystemController extends Controller
                 </div>
             </template>
 
+            <!-- Project 3: MuaraJogja -->
             <template x-if="activeProject === 'logic'">
                 <div>
                     <div class="text-mono-sm text-gold font-bold mb-1">SYSTEM SPECIFICATION — PROJECT 03</div>
@@ -1087,10 +1058,10 @@ class SystemController extends Controller
                         <div class="term-cyan mb-2 font-bold">&gt; AUTOMATED BACKGROUND QUEUE PIPELINE</div>
                         <p class="text-paper opacity-90 mb-3">
                             Local information aggregator operating 100% automated background ingestion data pipelines
-                            powered by Laravel Queue Workers & Cron jobs.
+                            powered by Laravel Queue Workers &amp; Cron jobs.
                         </p>
                         <div class="text-xs text-gold border-t border-paper/20 pt-2 flex flex-col gap-1">
-                            <div>• QUEUES: Asynchronous background scraping & data normalization workers</div>
+                            <div>• QUEUES: Asynchronous background scraping &amp; data normalization workers</div>
                             <div>• DATABASE: Indexed MySQL storage with deduplication hashing</div>
                             <div>• IMPACT: Fully automated local news stream, zero manual content curation required
                             </div>
@@ -1109,8 +1080,8 @@ class SystemController extends Controller
     </div>
 
     <!-- ============================================================
-         MAIN APPLICATION SCRIPT
-         ============================================================ -->
+     MAIN APPLICATION SCRIPT
+     ============================================================ -->
     <script src="js/main.js"></script>
 </body>
 
