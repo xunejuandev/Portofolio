@@ -174,6 +174,26 @@ updateSpy();
     });
 })();
 
+// Copy the contact email for visitors whose browser has no mail app (mailto does nothing for them)
+(function setupCopyEmail() {
+    const btn = document.getElementById('copy-email');
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+        const email = btn.dataset.email;
+        try {
+            await navigator.clipboard.writeText(email);
+        } catch (e) {
+            const t = document.createElement('textarea'); // older browsers / blocked clipboard API
+            t.value = email; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+            document.body.appendChild(t); t.select();
+            try { document.execCommand('copy'); } catch (err) { /* user can still select the visible text */ }
+            t.remove();
+        }
+        btn.textContent = 'COPIED ✓'; btn.classList.add('done');
+        setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('done'); }, 2000);
+    });
+})();
+
 // Alpine component for the Technical Arsenal board
 function arsenal() {
     let timer = null;

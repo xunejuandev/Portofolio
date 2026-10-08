@@ -94,7 +94,8 @@
                             </div>
                             <p class="qr-caption">SCAN TO OPEN THIS PAGE</p>
                             <p class="qr-url" id="qr-url"></p>
-                            <a class="scan-save" href="yakobus-dimas.vcf" download="yakobus-dimas.vcf">SAVE CONTACT .VCF &darr;</a>
+                            <a class="scan-save" href="yakobus-dimas.vcf">SAVE CONTACT .VCF &darr;</a>
+                            <p class="scan-hint">Opens your Contacts app. On Android, tap Open when the download finishes.</p>
                         </div>
                         <div class="scan-tear" aria-hidden="true">
                             <span class="tear-layer tear-pink"></span>
@@ -685,6 +686,7 @@ class SystemController extends Controller
                         <a href="https://github.com/xunejuandev" target="_blank" rel="noopener noreferrer" class="social-btn">💻 GITHUB</a>
                         <a href="mailto:xunejuan.dev@gmail.com" class="social-btn">✉️ EMAIL</a>
                     </div>
+                    <p class="email-copy">No mail app opens? Copy the address: <span class="email-text">xunejuan.dev@gmail.com</span> <button type="button" class="copy-btn" id="copy-email" data-email="xunejuan.dev@gmail.com">COPY</button></p>
                 </div>
 
                 <!-- Right: message form -->

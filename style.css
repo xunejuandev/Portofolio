@@ -2426,3 +2426,39 @@ button:focus-visible,
   transform: rotate(-5deg);
   transform-origin: 0 0;
 }
+
+/* fallback for visitors without a mail app: show the address and let them copy it */
+.email-copy {
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #3f3f46;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.email-text { font-weight: 700; color: var(--zine-ink); word-break: break-all; }
+
+.copy-btn {
+  border: 2px solid var(--zine-ink);
+  background-color: #fff;
+  padding: 0.15rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--zine-ink);
+  box-shadow: 2px 2px 0 var(--zine-ink);
+  cursor: pointer;
+}
+
+.copy-btn:hover { background-color: var(--zine-yellow); }
+.copy-btn.done { background-color: #34d399; }
+
+.scan-hint {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #52525b;
+  line-height: 1.4;
+}
