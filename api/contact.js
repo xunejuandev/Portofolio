@@ -19,7 +19,9 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+  const missing = ['GMAIL_USER', 'GMAIL_APP_PASSWORD'].filter((k) => !process.env[k]);
+  if (missing.length) {
+    console.error('Missing environment variables:', missing.join(', ')); // names only, never values
     return res.status(500).json({ success: false, message: 'Mail is not configured.' });
   }
 
