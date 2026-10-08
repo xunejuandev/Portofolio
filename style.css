@@ -1169,7 +1169,12 @@ html {
 }
 
 /* Modal Overlay */
+/* page behind the open dialog must not scroll */
+html.modal-open,
+html.modal-open body { overflow: hidden; }
+
 .arch-modal-overlay {
+  overscroll-behavior: contain;
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -1190,6 +1195,10 @@ html {
   padding: 1.5rem;
   box-shadow: var(--shadow-brutal-xl);
   position: relative;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .arch-modal-header {

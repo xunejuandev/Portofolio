@@ -37,12 +37,18 @@ function inspectModal(id) {
     document.getElementById('arch-modal-title').textContent = archData[id].title;
     document.getElementById('arch-modal-body').innerHTML = archData[id].body;
     modalTrigger = document.activeElement;
+    // lock the page behind the dialog; keep the layout from shifting when the scrollbar disappears
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    if (gap > 0) document.body.style.paddingRight = gap + 'px';
+    document.documentElement.classList.add('modal-open');
     modal.style.display = 'flex';
     modal.querySelector('.arch-close-btn').focus();
 }
 
 function closeArchModal() {
     document.getElementById('arch-modal').style.display = 'none';
+    document.documentElement.classList.remove('modal-open');
+    document.body.style.paddingRight = '';
     if (modalTrigger) modalTrigger.focus();
     modalTrigger = null;
 }
@@ -148,6 +154,7 @@ updateSpy();
         const label = btn.innerHTML;
         btn.disabled = true;
         btn.innerHTML = '<span>⏳</span> TRANSMITTING...';
+        let serverMsg = '';
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
@@ -155,11 +162,11 @@ updateSpy();
                 body: JSON.stringify(Object.fromEntries(new FormData(form))),
             });
             const json = await res.json().catch(() => ({}));
-            if (!res.ok || !json.success) throw new Error(json.message || 'rejected');
+            if (!res.ok || !json.success) { serverMsg = json.message || ''; throw new Error('rejected'); }
             form.reset();
             say(true, '✓ TRANSMISSION SENT SUCCESSFULLY! Yakobus will get back to you soon.');
         } catch (err) {
-            say(false, '✗ TRANSMISSION FAILED. Check your connection or email me directly.');
+            say(false, '✗ TRANSMISSION FAILED. ' + (serverMsg || 'Check your connection') + ' You can also email me directly.');
         } finally {
             btn.disabled = false;
             btn.innerHTML = label;
